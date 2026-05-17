@@ -1,0 +1,103 @@
+<!-- GLOBAL NAVBAR -->
+
+<div class="custom-navbar">
+
+  <!-- LEFT SIDE -->
+  <div class="nav-left">
+
+    <h2 class="logo">
+      AI Internship Portal
+    </h2>
+    <h2>{{ message }}</h2>
+    <div class="nav-links">
+
+      <a routerLink="/dashboard">
+        Dashboard
+      </a>
+
+      <a routerLink="/openings">
+        Openings
+      </a>
+
+      <a routerLink="/applied">
+        Applied
+      </a>
+
+      
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="nav-right">
+
+    <!-- SEARCH -->
+    <div class="search-box">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        placeholder="Search internships...">
+
+    </div>
+
+    <!-- NOTIFICATION -->
+    <div class="notification-icon">
+
+      <i class="fa-solid fa-bell"></i>
+
+      <span class="notification-count">
+        3
+      </span>
+
+    </div>
+
+    <!-- PROFILE -->
+    <div class="profile-section">
+
+      <div class="profile-circle">
+        S
+      </div>
+
+      <span class="profile-name">
+        Samruddhi
+      </span>
+
+      <!-- DROPDOWN -->
+      <div class="profile-dropdown">
+
+        <button class="dropdown-btn">
+
+          <i class="fa-solid fa-caret-down"></i>
+
+        </button>
+
+        <div class="dropdown-content">
+
+          <a routerLink="/profile">
+            My Profile
+          </a>
+
+          <a routerLink="/recommendations">
+            Recommendations
+          </a>
+
+          <a routerLink="/login">
+            Logout
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- PAGE CONTENT -->
+<router-outlet></router-outlet>
+<app-ai-chatbot></app-ai-chatbot>

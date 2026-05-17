@@ -1,0 +1,17 @@
+.btn-primary {
+  background: #0d6efd;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s;
+  box-shadow: none !important;
+}
+
+.btn-primary:hover {
+  background: #0b5ed7;
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  box-shadow: none !important;
+}

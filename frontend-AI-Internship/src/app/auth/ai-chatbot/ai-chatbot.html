@@ -1,0 +1,91 @@
+<!-- CHAT BUTTON -->
+<div
+  class="chat-toggle"
+  (click)="toggleChat()">
+
+  🤖
+
+</div>
+
+<!-- CHAT WINDOW -->
+<div
+  class="chat-container"
+  *ngIf="isOpen">
+
+  <!-- HEADER -->
+  <div class="chat-header">
+
+    <div>
+
+      <h3>
+        AI Career Assistant
+      </h3>
+
+      <p>
+        Ask anything about internships
+      </p>
+
+    </div>
+
+    <button (click)="toggleChat()">
+
+      ✖
+
+    </button>
+
+  </div>
+
+  <!-- CHAT BODY -->
+  <div class="chat-body">
+
+    <div class="bot-message">
+
+      👋 Hello Samruddhi! <br>
+      I can help you with:
+      <br><br>
+
+      • Internship recommendations <br>
+      • Resume tips <br>
+      • Career guidance <br>
+      • Skill roadmap <br>
+      • Interview preparation
+
+    </div>
+
+    <!-- USER MESSAGE -->
+    <div
+      class="user-message"
+      *ngIf="userMessage">
+
+      {{ userMessage }}
+
+    </div>
+
+    <!-- BOT REPLY -->
+    <div
+      class="bot-message"
+      *ngIf="botReply">
+
+      {{ botReply }}
+
+    </div>
+
+  </div>
+
+  <!-- INPUT -->
+  <div class="chat-input">
+
+    <input
+      type="text"
+      placeholder="Ask AI assistant..."
+      [(ngModel)]="message">
+
+    <button (click)="sendMessage()">
+
+      Send
+
+    </button>
+
+  </div>
+
+</div>
