@@ -1,0 +1,177 @@
+<div class="openings-container">
+
+  <!-- HEADER -->
+  <div class="openings-header">
+
+    <h1>
+      Internship Openings
+    </h1>
+
+    <p>
+      Explore internships based on your degree,
+      interests and preferred career domain.
+    </p>
+
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-section">
+
+    <!-- SEARCH -->
+    <input
+      type="text"
+      placeholder="Search internships..."
+      [(ngModel)]="searchText">
+
+    <!-- LOCATION -->
+    <select [(ngModel)]="selectedLocation">
+
+      <option value="">
+        All Locations
+      </option>
+
+      <option>Pune</option>
+      <option>Bangalore</option>
+      <option>Hyderabad</option>
+      <option>Delhi</option>
+      <option>Remote</option>
+
+    </select>
+
+    <!-- TYPE -->
+    <select [(ngModel)]="selectedType">
+
+      <option value="">
+        All Types
+      </option>
+
+      <option>Government</option>
+      <option>Private</option>
+
+    </select>
+
+    <!-- DOMAIN -->
+    <select [(ngModel)]="selectedDomain">
+
+      <option value="">
+        All Domains
+      </option>
+
+      <option>AI/ML</option>
+      <option>Cyber Security</option>
+      <option>Data Science</option>
+      <option>Cloud</option>
+      <option>Software Development</option>
+
+    </select>
+
+  </div>
+
+  <!-- OPENINGS GRID -->
+  <div class="openings-grid">
+
+    <div
+      class="opening-card"
+      *ngFor="let job of filteredInternships">
+
+      <!-- TOP -->
+      <div class="card-top">
+
+        <div>
+
+          <h2>
+            {{ job.title }}
+          </h2>
+
+          <p class="company-name">
+            {{ job.company }}
+          </p>
+
+        </div>
+
+        <!-- TYPE BADGE -->
+        <span
+          class="gov-badge"
+          *ngIf="job.type === 'Government'">
+
+          Government
+
+        </span>
+
+        <span
+          class="private-badge"
+          *ngIf="job.type === 'Private'">
+
+          Private
+
+        </span>
+
+      </div>
+
+      <!-- DESCRIPTION -->
+      <p class="description">
+
+        Internship opportunity based on your
+        degree and skill eligibility.
+
+      </p>
+
+      <!-- SKILLS -->
+      <div class="skills">
+
+        <span *ngFor="let skill of job.skills">
+
+          {{ skill }}
+
+        </span>
+
+      </div>
+
+      <!-- DETAILS -->
+      <div class="details">
+
+        <p>
+          📍 {{ job.location }}
+        </p>
+
+        <p>
+          💰 {{ job.stipend }}
+        </p>
+
+        <p>
+          🎓 {{ job.degree }}
+        </p>
+
+      </div>
+
+      <!-- MATCH -->
+      <div class="match-score">
+
+        Match Score: {{ job.match }}
+
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="buttons">
+
+        <a
+          [routerLink]="['/internship-details', job.id]"
+          class="view-btn">
+
+          View Details
+
+        </a>
+
+        <button class="save-btn">
+
+          Save
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

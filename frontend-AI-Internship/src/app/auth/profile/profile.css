@@ -1,0 +1,75 @@
+/* PAGE BACKGROUND */
+body{
+    background: #f4f7fc;
+}
+
+/* CARD */
+.card{
+    border-radius: 20px;
+}
+
+/* SECTION TITLE */
+.section-title{
+    color: #0047AB;
+    font-weight: 700;
+    margin-bottom: 25px;
+    border-left: 5px solid #0056d6;
+    padding-left: 12px;
+}
+
+/* INPUTS */
+.form-control,
+.form-select{
+    height: 48px;
+    border-radius: 10px;
+}
+
+/* TEXTAREA */
+textarea.form-control{
+    height: auto;
+}
+
+/* INPUT FOCUS */
+.form-control:focus,
+.form-select:focus{
+    border-color: #0056d6;
+    box-shadow: 0 0 6px rgba(0,86,214,0.25);
+}
+
+/* BUTTON */
+.btn-primary{
+    background: #0056d6;
+    border: none;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover{
+    background: #0047AB;
+    transform: translateY(-2px);
+}
+
+/* STEP BOX */
+.step-box{
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: #e9ecef;
+    font-weight: 600;
+    color: #555;
+}
+
+/* ACTIVE STEP */
+.active-step{
+    background: #0056d6;
+    color: white;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+    .step-box{
+        width: 100%;
+        text-align: center;
+    }
+
+}

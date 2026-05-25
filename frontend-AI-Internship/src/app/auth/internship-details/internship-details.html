@@ -1,0 +1,234 @@
+<div class="details-container" *ngIf="internship">
+
+  <!-- TOP SECTION -->
+  <div class="details-header">
+
+    <div>
+
+      <h1>
+        {{ internship.title }}
+      </h1>
+
+      <h3>
+        {{ internship.company }}
+      </h3>
+
+      <p class="location">
+        📍 {{ internship.location }}
+      </p>
+
+      <p class="stipend">
+        💰 {{ internship.stipend }}
+      </p>
+
+    </div>
+
+    <div class="top-buttons">
+
+      <button class="apply-btn">
+        Apply Now
+      </button>
+
+      <button class="save-btn">
+        Save Internship
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- MATCH SECTION -->
+  <div class="match-box">
+
+    <h2>
+      {{ internship.match }} AI Match
+    </h2>
+
+    <p>
+
+      This internship is recommended based on your:
+
+    </p>
+
+    <ul>
+
+      <li>Skills and technologies</li>
+
+      <li>Academic performance</li>
+
+      <li>CGPA eligibility</li>
+
+      <li>Preferred locations</li>
+
+      <li>Degree matching</li>
+
+    </ul>
+
+  </div>
+
+  <!-- JOB DESCRIPTION -->
+  <div class="section-card">
+
+    <h2>
+      Job Description
+    </h2>
+
+    <p>
+      {{ internship.description }}
+    </p>
+
+  </div>
+
+  <!-- ELIGIBILITY -->
+  <div class="section-card">
+
+    <h2>
+      Eligibility Criteria
+    </h2>
+
+    <ul>
+
+      <li>
+        {{ internship.eligibility }}
+      </li>
+
+      <li>
+        {{ internship.education }}
+      </li>
+
+      <li>
+        Strong communication and analytical skills
+      </li>
+
+      <li>
+        Basic technical knowledge required
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section-card">
+
+    <h2>
+      Required Skills
+    </h2>
+
+    <div class="skills-container">
+
+      <span *ngFor="let skill of internship.skills">
+
+        {{ skill }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- RESPONSIBILITIES -->
+  <div class="section-card">
+
+    <h2>
+      Responsibilities
+    </h2>
+
+    <ul>
+
+      <li>
+        Work on real-time projects and tasks
+      </li>
+
+      <li>
+        Collaborate with technical teams
+      </li>
+
+      <li>
+        Create reports and documentation
+      </li>
+
+      <li>
+        Participate in research and development
+      </li>
+
+      <li>
+        Learn industry-level workflows
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="section-card">
+
+    <h2>
+      Perks & Benefits
+    </h2>
+
+    <ul>
+
+      <li>
+        Internship completion certificate
+      </li>
+
+      <li>
+        Hands-on industry experience
+      </li>
+
+      <li>
+        Networking opportunities
+      </li>
+
+      <li>
+        Real project exposure
+      </li>
+
+      <li>
+        Potential PPO opportunity
+      </li>
+
+    </ul>
+
+  </div>
+
+  <!-- ORGANIZATION -->
+  <div class="section-card">
+
+    <h2>
+      About Organization
+    </h2>
+
+    <p>
+
+      {{ internship.company }}
+
+      provides internship opportunities for students
+      to gain industry experience, technical exposure
+      and practical learning.
+
+    </p>
+
+  </div>
+
+  <!-- APPLY SECTION -->
+  <div class="bottom-section">
+
+    <button class="large-apply-btn">
+
+      Apply Internship
+
+    </button>
+
+    <a
+      routerLink="/dashboard"
+      class="back-btn">
+
+      Back to Dashboard
+
+    </a>
+
+  </div>
+
+</div>
