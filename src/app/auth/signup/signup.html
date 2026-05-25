@@ -1,0 +1,315 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar shadow-sm">
+  <div class="container">
+
+    <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/">
+      <i class="fas fa-graduation-cap me-2"></i>
+      AI Internship Portal
+    </a>
+
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <li class="nav-item">
+          <a class="nav-link nav-hover" routerLink="/">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-hover" routerLink="/internships">
+            Internship Programs
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-hover" routerLink="/eligibility">
+            Eligibility
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link nav-hover" routerLink="/contact">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<!-- SIGNUP SECTION -->
+<div class="container-fluid min-vh-100 d-flex align-items-center
+            justify-content-center bg-light py-5">
+
+  <div class="card shadow-lg border-0"
+       style="width: 450px; border-radius: 16px; overflow: hidden;">
+
+    <!-- Card Header -->
+    <div class="bg-primary text-white text-center py-4">
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png"
+        width="75"
+        class="mb-2">
+
+      <h3 class="fw-bold mb-1">AI Internship Portal</h3>
+
+      <p class="mb-0 small">
+        Government Internship Registration System
+      </p>
+
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body p-4">
+
+      <div class="text-center mb-4">
+        <h4 class="fw-bold text-dark">Candidate Registration</h4>
+        <p class="text-muted small">Create your internship portal account</p>
+      </div>
+
+      <!-- ✅ FIXED FORM — one form, one submit button -->
+      <form #signupForm="ngForm" (ngSubmit)="register()">
+
+        <!-- Full Name -->
+        <div class="mb-3">
+
+          <label class="form-label fw-semibold">
+            Full Name <span class="text-danger">*</span>
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text bg-white">
+              <i class="fas fa-user text-primary"></i>
+            </span>
+
+            <!-- ✅ Fixed: added name="fullname", #fullname="ngModel", 
+                 class="form-control", required, minlength, pattern -->
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter your full name"
+              [(ngModel)]="name"
+              name="fullname"
+              #fullname="ngModel"
+              required
+              minlength="3"
+              pattern="^[a-zA-Z ]*$"
+            />
+
+          </div>
+
+          <!-- Validation messages -->
+          <small class="text-danger"
+                 *ngIf="fullname.invalid && fullname.touched">
+
+            <span *ngIf="fullname.errors?.['required']">
+              Full Name is required
+            </span>
+
+            <span *ngIf="fullname.errors?.['minlength']">
+              Minimum 3 characters required
+            </span>
+
+            <span *ngIf="fullname.errors?.['pattern']">
+              Only alphabets are allowed
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+
+          <label class="form-label fw-semibold">
+            Email Address <span class="text-danger">*</span>
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text bg-white">
+              <i class="fas fa-envelope text-primary"></i>
+            </span>
+
+            <!-- ✅ Fixed: added name="email", #emailField="ngModel" -->
+            <!-- Note: using #emailField not #email to avoid conflict 
+                 with component variable "email" -->
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Enter your email address"
+              [(ngModel)]="email"
+              name="email"
+              #emailField="ngModel"
+              required
+              email
+            />
+
+          </div>
+
+          <small class="text-danger"
+                 *ngIf="emailField.invalid && emailField.touched">
+
+            <span *ngIf="emailField.errors?.['required']">
+              Email is required
+            </span>
+
+            <span *ngIf="emailField.errors?.['email']">
+              Enter a valid email with @ symbol
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mb-3">
+
+          <label class="form-label fw-semibold">
+            Phone Number <span class="text-danger">*</span>
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text bg-white">
+              <i class="fas fa-phone text-primary"></i>
+            </span>
+
+            <!-- ✅ Fixed: added name="phone", #phoneField="ngModel" -->
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter 10-digit phone number"
+              [(ngModel)]="phone"
+              name="phone"
+              #phoneField="ngModel"
+              required
+              pattern="^[0-9]{10}$"
+            />
+
+          </div>
+
+          <small class="text-danger"
+                 *ngIf="phoneField.invalid && phoneField.touched">
+
+            <span *ngIf="phoneField.errors?.['required']">
+              Phone Number is required
+            </span>
+
+            <span *ngIf="phoneField.errors?.['pattern']">
+              Phone Number must contain exactly 10 digits
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+
+          <label class="form-label fw-semibold">
+            Password <span class="text-danger">*</span>
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text bg-white">
+              <i class="fas fa-lock text-primary"></i>
+            </span>
+
+            <!-- ✅ Fixed: added name="password", #passwordField="ngModel" -->
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Create a password (min 6 characters)"
+              [(ngModel)]="password"
+              name="password"
+              #passwordField="ngModel"
+              required
+              minlength="6"
+            />
+
+          </div>
+
+          <small class="text-danger"
+                 *ngIf="passwordField.invalid && passwordField.touched">
+
+            <span *ngIf="passwordField.errors?.['required']">
+              Password is required
+            </span>
+
+            <span *ngIf="passwordField.errors?.['minlength']">
+              Password must be at least 6 characters
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="success"
+             class="alert alert-success text-center py-2 mb-3">
+          {{ success }}
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="error"
+             class="alert alert-danger text-center py-2 mb-3">
+          {{ error }}
+        </div>
+
+        <!-- ✅ Single Submit Button — removed the duplicate -->
+        <button
+          type="submit"
+          class="btn btn-primary w-100 py-2 fw-bold"
+          [disabled]="loading || signupForm.invalid">
+
+          <span *ngIf="loading">
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Registering...
+          </span>
+
+          <span *ngIf="!loading">
+            <i class="fas fa-user-plus me-2"></i>
+            Create Account
+          </span>
+
+        </button>
+
+      </form>
+      <!-- ✅ Form ends here — login link is OUTSIDE the form -->
+
+      <!-- Login Link -->
+      <div class="text-center mt-4">
+
+        <small class="text-muted">Already have an account?</small>
+
+        <a routerLink="/login"
+           class="text-decoration-none fw-semibold ms-1">
+          Login Here
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Card Footer -->
+    <div class="bg-light text-center py-3 border-top">
+      <small class="text-muted">
+        © 2026 Government AI Internship Scheme Portal
+      </small>
+    </div>
+
+  </div>
+
+</div>

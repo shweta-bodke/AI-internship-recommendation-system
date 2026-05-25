@@ -1,0 +1,116 @@
+<!-- src/app/auth/openings/opening.html -->
+
+<div class="openings-container">
+
+  <!-- HEADER -->
+  <div class="openings-header">
+    <h1>Internship Openings</h1>
+    <p>
+      Explore internships based on your degree,
+      interests and preferred career domain.
+    </p>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-section">
+
+    <input
+      type="text"
+      placeholder="Search by role or company..."
+      [(ngModel)]="searchText"
+    />
+
+    <select [(ngModel)]="selectedLocation">
+      <option value="">All Locations</option>
+      <option>Pune</option>
+      <option>Bangalore</option>
+      <option>Hyderabad</option>
+      <option>Delhi</option>
+      <option>Remote</option>
+    </select>
+
+    <select [(ngModel)]="selectedDomain">
+      <option value="">All Domains</option>
+      <option>Java</option>
+      <option>Python</option>
+      <option>AI</option>
+      <option>SQL</option>
+      <option>Cloud</option>
+      <option>Angular</option>
+    </select>
+
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2 text-muted">Loading internships...</p>
+  </div>
+
+  <!-- ERROR -->
+  <div *ngIf="error && !loading"
+       class="alert alert-danger text-center m-4">
+    {{ error }}
+  </div>
+
+  <!-- NO RESULTS -->
+  <div *ngIf="!loading && filteredInternships.length === 0 && !error"
+       class="text-center py-5">
+    <p class="text-muted">No internships found matching your filters.</p>
+  </div>
+
+  <!-- OPENINGS GRID -->
+  <div class="openings-grid" *ngIf="!loading && !error">
+
+    <div class="opening-card"
+         *ngFor="let job of filteredInternships">
+
+      <!-- TOP — fixed: role and companyName -->
+      <div class="card-top">
+
+        <div>
+          <h2>{{ job.role }}</h2>
+          <p class="company-name">{{ job.companyName }}</p>
+        </div>
+
+        <!-- Min CGPA badge -->
+        <span class="gov-badge">
+          CGPA {{ job.minimumCgpa }}+
+        </span>
+
+      </div>
+
+      <!-- DESCRIPTION -->
+      <p class="description">{{ job.description }}</p>
+
+      <!-- SKILLS — fixed: split string into array -->
+      <div class="skills">
+        <span *ngFor="let skill of getSkillsList(job.requiredSkills)">
+          {{ skill }}
+        </span>
+      </div>
+
+      <!-- DETAILS — fixed: correct field names -->
+      <div class="details">
+        <p>📍 {{ job.location }}</p>
+        <p>💰 ₹{{ job.stipend }}/month</p>
+        <p>🎓 Min CGPA: {{ job.minimumCgpa }}</p>
+        <p>📚 {{ job.eligibleDegree }}</p>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="buttons">
+        <a [routerLink]="['/internship-details', job.id]"
+           class="view-btn">
+          View Details
+        </a>
+        <button class="save-btn" (click)="saveInternship(job)">
+          Save
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

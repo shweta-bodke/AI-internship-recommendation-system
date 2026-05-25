@@ -1,0 +1,185 @@
+<!-- src/app/auth/login/login.component.html -->
+
+<div class="container-fluid min-vh-100 d-flex align-items-center
+            justify-content-center bg-light">
+
+  <div class="card shadow-lg border-0"
+       style="width: 430px; border-radius: 16px; overflow: hidden;">
+
+    <!-- Header -->
+    <div class="bg-primary text-white text-center py-4">
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png"
+        width="75"
+        class="mb-2">
+
+      <h3 class="fw-bold mb-1">AI Internship Portal</h3>
+
+      <p class="mb-0 small">Government Internship Scheme System</p>
+
+    </div>
+
+    <!-- Body -->
+    <div class="card-body p-4">
+
+      <div class="text-center mb-4">
+        <h4 class="fw-bold text-dark">Candidate Login</h4>
+        <p class="text-muted small">Access your internship dashboard securely</p>
+      </div>
+
+      <!-- ✅ Fixed: added #loginForm="ngForm" and (ngSubmit) -->
+      <form #loginForm="ngForm" (ngSubmit)="login()">
+
+        <!-- Email -->
+        <div class="mb-3">
+
+          <label class="form-label fw-semibold">
+            Registered Email <span class="text-danger">*</span>
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text bg-white">
+              <i class="fas fa-envelope text-primary"></i>
+            </span>
+
+            <!-- ✅ Fixed: added name, #ref, class, required, email -->
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Enter your registered email"
+              [(ngModel)]="email"
+              name="email"
+              #emailField="ngModel"
+              required
+              email
+            />
+
+          </div>
+
+          <!-- Validation -->
+          <small class="text-danger"
+                 *ngIf="emailField.invalid && emailField.touched">
+
+            <span *ngIf="emailField.errors?.['required']">
+              Email is required
+            </span>
+
+            <span *ngIf="emailField.errors?.['email']">
+              Enter a valid email address
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+
+          <label class="form-label fw-semibold">
+            Password <span class="text-danger">*</span>
+          </label>
+
+          <div class="input-group">
+
+            <span class="input-group-text bg-white">
+              <i class="fas fa-lock text-primary"></i>
+            </span>
+
+            <!-- ✅ Fixed: added name, #ref, class, required -->
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Enter your password"
+              [(ngModel)]="password"
+              name="password"
+              #passwordField="ngModel"
+              required
+              minlength="6"
+            />
+
+          </div>
+
+          <!-- Validation -->
+          <small class="text-danger"
+                 *ngIf="passwordField.invalid && passwordField.touched">
+
+            <span *ngIf="passwordField.errors?.['required']">
+              Password is required
+            </span>
+
+            <span *ngIf="passwordField.errors?.['minlength']">
+              Password must be at least 6 characters
+            </span>
+
+          </small>
+
+        </div>
+
+        <!-- Remember Me + Forgot Password -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label small" for="rememberMe">
+              Remember Me
+            </label>
+          </div>
+
+          <a href="#" class="small text-decoration-none text-primary">
+            Forgot Password?
+          </a>
+
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="error"
+             class="alert alert-danger text-center py-2 mb-3">
+          {{ error }}
+        </div>
+
+        <!-- ✅ Fixed: single login button, removed duplicate routerLink button -->
+        <button
+          type="submit"
+          class="btn btn-primary w-100 py-2 fw-bold"
+          [disabled]="loading || loginForm.invalid">
+
+          <span *ngIf="loading">
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Logging in...
+          </span>
+
+          <span *ngIf="!loading">
+            <i class="fas fa-sign-in-alt me-2"></i>
+            Login
+          </span>
+
+        </button>
+
+      </form>
+
+      <!-- Divider -->
+      <div class="text-center my-4">
+        <span class="text-muted small">OR</span>
+      </div>
+
+      <!-- ✅ Fixed: routerLink instead of href="#" -->
+      <a routerLink="/signup"
+         class="btn btn-outline-primary w-100 fw-semibold">
+        <i class="fas fa-user-plus me-2"></i>
+        New Candidate Registration
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-light text-center py-3 border-top">
+      <small class="text-muted">
+        © 2026 Government Internship & Skill Development Portal
+      </small>
+    </div>
+
+  </div>
+
+</div>

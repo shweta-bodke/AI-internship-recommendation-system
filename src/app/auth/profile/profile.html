@@ -1,0 +1,98 @@
+<!-- Personal Info inputs — add [(ngModel)] to each -->
+<input type="text"  class="form-control"
+       [(ngModel)]="name"        placeholder="Enter Full Name" />
+
+<input type="email" class="form-control"
+       [(ngModel)]="email"       placeholder="Enter Email" />
+
+<input type="tel"   class="form-control"
+       [(ngModel)]="phone"       placeholder="Enter Phone Number" />
+
+<input type="date"  class="form-control"
+       [(ngModel)]="dateOfBirth" />
+
+<select class="form-select" [(ngModel)]="gender">
+  <option value="">Select Gender</option>
+  <option>Male</option>
+  <option>Female</option>
+  <option>Other</option>
+</select>
+
+<input type="text"  class="form-control"
+       [(ngModel)]="location"    placeholder="Enter City" />
+
+<!-- Education -->
+<input type="text"   class="form-control"
+       [(ngModel)]="collegeName"   placeholder="Enter College Name" />
+
+<input type="text"   class="form-control"
+       [(ngModel)]="currentDegree" placeholder="BCA, MCA, BTech" />
+
+<input type="text"   class="form-control"
+       [(ngModel)]="specialization" placeholder="Computer Science" />
+
+<input type="number" class="form-control"
+       [(ngModel)]="cgpa"          placeholder="Enter CGPA" />
+
+<input type="number" class="form-control"
+       [(ngModel)]="passingYear"   placeholder="2026" />
+
+<!-- 10th and 12th -->
+<input type="text"   class="form-control"
+       [(ngModel)]="tenthPercentage"   placeholder="85%" />
+
+<input type="text"   class="form-control"
+       [(ngModel)]="twelfthPercentage" placeholder="78%" />
+
+<!-- Skills -->
+<input type="text"   class="form-control"
+       [(ngModel)]="technicalSkills"
+       placeholder="Angular, Python, SQL" />
+
+<textarea class="form-control" rows="4"
+          [(ngModel)]="projectSummary"
+          placeholder="Mention your major projects"></textarea>
+
+<input type="url"    class="form-control"
+       [(ngModel)]="githubLink"   placeholder="GitHub Link" />
+
+<input type="url"    class="form-control"
+       [(ngModel)]="linkedinLink" placeholder="LinkedIn Link" />
+
+<!-- Certifications -->
+<textarea class="form-control" rows="4"
+          [(ngModel)]="certifications"
+          placeholder="Mention completed certifications"></textarea>
+
+<!-- Preferences -->
+<select class="form-select" [(ngModel)]="preferredInternshipRole">
+  <option value="">Select Role</option>
+  <option>Frontend Developer</option>
+  <option>Backend Developer</option>
+  <option>Full Stack Developer</option>
+  <option>Data Analyst</option>
+  <option>AI/ML Intern</option>
+</select>
+
+<input type="text"   class="form-control"
+       [(ngModel)]="preferredLocation"
+       placeholder="Pune, Bangalore, Mumbai" />
+
+<!-- Success / Error messages -->
+<div *ngIf="success" class="alert alert-success text-center mt-3">
+  {{ success }}
+</div>
+
+<div *ngIf="error" class="alert alert-danger text-center mt-3">
+  {{ error }}
+</div>
+
+<!-- ✅ Fixed: button calls saveProfile() instead of routerLink -->
+<div class="text-center">
+  <button
+    class="btn btn-primary px-5"
+    (click)="saveProfile()"
+    [disabled]="loading">
+    {{ loading ? 'Saving...' : 'Save Profile' }}
+  </button>
+</div>

@@ -1,0 +1,147 @@
+<!-- src/app/auth/dashboard/dashboard.html -->
+
+<div class="dashboard-container">
+
+  <!-- PAGE HEADER -->
+  <div class="dashboard-header">
+
+    <h1>AI Recommended Internships</h1>
+
+    <p>
+      Personalized recommendations based on your skills,
+      CGPA, academics, eligibility criteria and preferred location.
+    </p>
+
+    <!-- Welcome + Logout -->
+    <div class="d-flex justify-content-between align-items-center mt-2">
+
+      <span class="text-muted" *ngIf="userName">
+        👋 Welcome back, <strong>{{ userName }}</strong>
+      </span>
+
+      <button class="btn btn-outline-danger btn-sm" (click)="logout()">
+        Logout
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ── LOADING STATE ─────────────────────────── -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-3 text-muted">Finding best matches for you...</p>
+  </div>
+
+  <!-- ── ERROR STATE ───────────────────────────── -->
+  <div *ngIf="error && !loading"
+       class="alert alert-danger text-center mx-3">
+    {{ error }}
+  </div>
+
+  <!-- ── EMPTY STATE ───────────────────────────── -->
+  <div *ngIf="!loading && !error && recommendations.length === 0"
+       class="text-center py-5">
+
+    <p class="fs-5">😕 No recommendations found yet.</p>
+
+    <p class="text-muted">
+      Please complete your profile with your skills and CGPA first.
+    </p>
+
+    <button class="btn btn-primary" (click)="goToProfile()">
+      Complete My Profile
+    </button>
+
+  </div>
+
+  <!-- ── STATS (real numbers from API) ─────────── -->
+  <div class="stats-grid" *ngIf="!loading && recommendations.length > 0">
+
+    <div class="stat-card">
+      <h2>{{ totalMatches }}</h2>
+      <p>Total Matches</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ highestMatch }}%</h2>
+      <p>Highest Match</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ recommendations.length }}</h2>
+      <p>Recommendations</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>0</h2>
+      <p>Applied</p>
+    </div>
+
+  </div>
+
+  <!-- ── SECTION TITLE ─────────────────────────── -->
+  <div class="section-title"
+       *ngIf="!loading && recommendations.length > 0">
+    <h2>Highly Matched Opportunities 🔥</h2>
+  </div>
+
+  <!-- ── INTERNSHIP GRID (real data via *ngFor) ── -->
+  <div class="internship-grid"
+       *ngIf="!loading && recommendations.length > 0">
+
+    <!-- ✅ Single card template — loops for every recommendation -->
+    <div class="internship-card"
+         *ngFor="let item of recommendations; let i = index">
+
+      <!-- Card Top — role + match badge -->
+      <div class="card-top">
+
+        <div>
+          <h3>{{ item.role }}</h3>
+          <p class="company-name">🏢 {{ item.companyName }}</p>
+        </div>
+
+        <!-- ✅ Badge color changes based on match % -->
+        <div class="match-score"
+             [ngClass]="getMatchClass(item.matchPercentage)">
+          {{ item.matchPercentage }}% Match
+        </div>
+
+      </div>
+
+      <!-- Job Details -->
+      <div class="job-details">
+        <p>📍 {{ item.location }}</p>
+        <p>💰 ₹{{ item.stipend }}/month</p>
+      </div>
+
+      <!-- ✅ AI Insight — generated dynamically -->
+      <div class="ai-box">
+        <h4>🤖 AI Insight</h4>
+        <p>{{ getAiInsight(item) }}</p>
+      </div>
+
+      <!-- Card Buttons -->
+      <div class="card-buttons">
+
+        <!-- ✅ routerLink uses real internship id from API 
+             NOTE: RecommendationResponse doesn't have id yet
+             — see note below about adding id to response -->
+        <button
+          class="details-btn"
+          (click)="router.navigate(['/internship-details', i + 1])">
+          View Details
+        </button>
+
+        <button class="save-btn" (click)="saveInternship(item)">
+          Save
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

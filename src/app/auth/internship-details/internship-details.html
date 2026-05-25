@@ -1,0 +1,170 @@
+<!-- src/app/auth/internship-details/internship-details.html -->
+
+<!-- ── LOADING STATE ──────────────────────────────── -->
+<div *ngIf="loading" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status"></div>
+  <p class="mt-3 text-muted">Loading internship details...</p>
+</div>
+
+<!-- ── ERROR STATE ───────────────────────────────── -->
+<div *ngIf="error && !loading"
+     class="alert alert-danger text-center m-4">
+  {{ error }}
+  <br>
+  <button class="btn btn-outline-danger btn-sm mt-2"
+          (click)="goBack()">
+    Go Back
+  </button>
+</div>
+
+<!-- ── MAIN CONTENT ──────────────────────────────── -->
+<!-- ✅ Fixed: only shows when internship data is loaded -->
+<div class="details-container" *ngIf="internship && !loading">
+
+  <!-- TOP SECTION -->
+  <div class="details-header">
+
+    <div>
+
+      <!-- ✅ Fixed: role not title, companyName not company -->
+      <h1>{{ internship.role }}</h1>
+      <h3>{{ internship.companyName }}</h3>
+      <p class="location">📍 {{ internship.location }}</p>
+      <p class="stipend">💰 ₹{{ internship.stipend }}/month</p>
+      <p class="cgpa">🎓 Min CGPA: {{ internship.minimumCgpa }}</p>
+
+    </div>
+
+    <div class="top-buttons">
+
+      <!-- ✅ Fixed: added (click) handlers -->
+      <button class="apply-btn" (click)="applyNow()">
+        Apply Now
+      </button>
+
+      <button class="save-btn" (click)="saveInternship()">
+        Save Internship
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ELIGIBILITY INFO -->
+  <div class="section-card">
+
+    <h2>Eligibility Criteria</h2>
+
+    <ul>
+
+      <!-- ✅ Fixed: using real backend fields -->
+      <li>
+        <strong>Eligible Degree:</strong>
+        {{ internship.eligibleDegree }}
+      </li>
+
+      <li>
+        <strong>Minimum CGPA Required:</strong>
+        {{ internship.minimumCgpa }}
+      </li>
+
+      <li>Strong communication and analytical skills</li>
+      <li>Basic technical knowledge required</li>
+
+    </ul>
+
+  </div>
+
+  <!-- JOB DESCRIPTION -->
+  <div class="section-card">
+
+    <h2>Job Description</h2>
+
+    <!-- ✅ Fixed: description exists in your Internship model -->
+    <p>{{ internship.description }}</p>
+
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section-card">
+
+    <h2>Required Skills</h2>
+
+    <div class="skills-container">
+
+      <!-- ✅ Fixed: using skillsList array (split from requiredSkills string) -->
+      <!-- Cannot use *ngFor on a string — must split first in .ts file -->
+      <span *ngFor="let skill of skillsList" class="skill-tag">
+        {{ skill }}
+      </span>
+
+      <!-- Fallback if skillsList is empty -->
+      <p *ngIf="skillsList.length === 0" class="text-muted">
+        {{ internship.requiredSkills }}
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RESPONSIBILITIES -->
+  <div class="section-card">
+
+    <h2>Responsibilities</h2>
+
+    <ul>
+      <li>Work on real-time projects and tasks</li>
+      <li>Collaborate with technical teams</li>
+      <li>Create reports and documentation</li>
+      <li>Participate in research and development</li>
+      <li>Learn industry-level workflows</li>
+    </ul>
+
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="section-card">
+
+    <h2>Perks & Benefits</h2>
+
+    <ul>
+      <li>Internship completion certificate</li>
+      <li>Hands-on industry experience</li>
+      <li>Networking opportunities</li>
+      <li>Real project exposure</li>
+      <li>Potential PPO opportunity</li>
+    </ul>
+
+  </div>
+
+  <!-- ABOUT ORGANIZATION -->
+  <div class="section-card">
+
+    <h2>About Organization</h2>
+
+    <!-- ✅ Fixed: companyName not company -->
+    <p>
+      <strong>{{ internship.companyName }}</strong>
+      provides internship opportunities for students
+      to gain industry experience, technical exposure
+      and practical learning.
+    </p>
+
+  </div>
+
+  <!-- APPLY SECTION -->
+  <div class="bottom-section">
+
+    <!-- ✅ Fixed: added (click) handler -->
+    <button class="large-apply-btn" (click)="applyNow()">
+      Apply Internship
+    </button>
+
+    <!-- ✅ Fixed: using (click) instead of routerLink -->
+    <button class="back-btn" (click)="goBack()">
+      Back to Dashboard
+    </button>
+
+  </div>
+
+</div>

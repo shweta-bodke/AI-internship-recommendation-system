@@ -1,0 +1,130 @@
+<!-- src/app/auth/applied/applied.html -->
+
+<div class="applied-container">
+
+  <!-- HEADER -->
+  <div class="applied-header">
+    <h1>Applied Internships</h1>
+    <p>
+      Track all your internship applications,
+      statuses and interview progress.
+    </p>
+  </div>
+
+  <!-- ── STATS (real numbers from list) ─────────── -->
+  <div class="applied-stats">
+
+    <div class="stat-card">
+      <h2>{{ totalApplied }}</h2>
+      <p>Total Applied</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ underReview }}</h2>
+      <p>Under Review</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ interviewScheduled }}</h2>
+      <p>Interview Scheduled</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ selected }}</h2>
+      <p>Selected</p>
+    </div>
+
+  </div>
+
+  <!-- ── EMPTY STATE ───────────────────────────── -->
+  <div *ngIf="appliedList.length === 0"
+       class="text-center py-5">
+    <p class="fs-5">📭 No applications yet.</p>
+    <p class="text-muted">
+      Go to internship openings and apply to get started.
+    </p>
+    <a routerLink="/openings" class="btn btn-primary">
+      Browse Openings
+    </a>
+  </div>
+
+  <!-- ── APPLICATIONS LIST (real data via *ngFor) ─ -->
+  <div class="applications-section"
+       *ngIf="appliedList.length > 0">
+
+    <div class="application-card"
+         *ngFor="let item of appliedList">
+
+      <!-- Top Section -->
+      <div class="top-section">
+
+        <div>
+          <!-- ✅ Fixed: real field names -->
+          <h2>{{ item.role }}</h2>
+          <p class="company">
+            {{ item.companyName }} • {{ item.location }}
+          </p>
+        </div>
+
+        <!-- ✅ Fixed: dynamic status badge -->
+        <span [class]="getStatusClass(item.status)">
+          {{ item.status }}
+        </span>
+
+      </div>
+
+      <!-- ✅ Fixed: dynamic description based on status -->
+      <p class="description">
+        {{ getStatusDescription(item.status, item.companyName) }}
+      </p>
+
+      <!-- Details -->
+      <div class="details">
+        <p>📅 Applied On: {{ item.appliedOn }}</p>
+        <p>💰 ₹{{ item.stipend }}/month</p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-section">
+
+        <div class="progress-label">
+          Application Progress
+        </div>
+
+        <div class="progress-bar">
+          <!-- ✅ Fixed: dynamic progress class -->
+          <div [class]="getProgressClass(item.status)"></div>
+        </div>
+
+      </div>
+
+      <!-- Buttons -->
+      <div class="buttons">
+
+        <!-- ✅ Fixed: routerLink with real internship ID -->
+        <a [routerLink]="['/internship-details', item.internshipId]"
+           class="view-btn">
+          View Details
+        </a>
+
+        <!-- Show Offer button if Selected, Withdraw otherwise -->
+        <button
+          *ngIf="item.status === 'Selected'"
+          class="offer-btn">
+          View Offer
+        </button>
+
+        <button
+          *ngIf="item.status !== 'Selected'"
+          class="withdraw-btn"
+          (click)="withdraw(item.internshipId)">
+          Withdraw
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
